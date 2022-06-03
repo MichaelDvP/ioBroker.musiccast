@@ -21,7 +21,7 @@ const dpZoneCommands = {
 	mute: 'mute',
 	surround: 'surround',
 	volume: 'setVolumeTo',
-	input: 'input',
+	input: 'setInput',
 	bass_extension: 'setBassExtension',
 	enhancer: 'setEnhancer',
 	direct: 'setDirect',
@@ -257,6 +257,7 @@ class Musiccast extends utils.Adapter {
 					case 'mute':
 					case 'surround':
 					case 'volume':
+					case 'input':
 					case 'bass_extension':
 					case 'enhancer':
 					case 'direct':
@@ -288,18 +289,6 @@ class Musiccast extends utils.Adapter {
 						}
 						break;
 					//calls without zone
-					case 'input':
-						try {
-							const result = await yamaha.setInput(state.val, zone);
-							if (result.response_code === 0) {
-								this.log.debug('set input succesfully  to ' + zone + ' with ' + state.val);
-							} else {
-								this.log.debug('failure setting Input ' + this.responseFailLog(result));
-							}
-						} catch (err) {
-							this.log.debug('API call failure ' + dp + ' cmd ' + err);
-						}
-						break;
 					case 'subwoofer_volume':
 						try {
 							let value = state.val;
